@@ -113,9 +113,9 @@ int main(int argc, char ** argv)
 
     vector<Point> points;
     while (!file.eof()) {
-        string line = "";
+        string line;
         while (getline(file, line)) {
-            if (line == "") break;
+            if (line.empty()) break;
 
             auto p = parse(line);
             points.push_back(p);
