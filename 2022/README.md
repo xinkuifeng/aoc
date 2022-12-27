@@ -18,5 +18,5 @@ You can use the following command to run the binary.
 As per [this thread](https://www.reddit.com/r/adventofcode/comments/zh2hk0/2022friendly_reminder_dont_commit_your_input/)
 on Reddit, the real input file is not shared publicly.
 
-![2022](res/2022.png)
+![2022_Finished](res/2022_end.png)
 
