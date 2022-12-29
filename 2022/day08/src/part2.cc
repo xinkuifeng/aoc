@@ -18,49 +18,31 @@ vector<vector<int>> parse(const vector<string> & lines) {
     return board;
 }
 
-int scenic_score(const vector<vector<int>> & board, int x, int y) {
+bool on_boarder(const vector<vector<int>> & board, int x, int y) {
     int m = board.size();
     int n = board[0].size();
 
-    int north = 0;
-    for (int i = x - 1; i >= 0; --i) {
-        if (board[i][y] >= board[x][y]) {
-            ++north;
-            break;
+    return x <= 0 || x >= m - 1 || y <= 0 || y >= n - 1;
+}
+
+int scenic_score(const vector<vector<int>> & board, int x, int y) {
+    static const vector<vector<int>> dirs{{0,1}, {0,-1}, {1,0}, {-1,0}};
+    int total = 1;
+    for (const auto & dir : dirs) {
+        int i = x, j = y;
+        int cnt = 0;
+        while (!on_boarder(board, i, j)) {
+            i += dir[0];
+            j += dir[1];
+            ++cnt;
+            if (board[i][j] >= board[x][y]) {
+                break;
+            }
         }
-        ++north;
+        if (cnt == 0) return 0;
+        total *= cnt;
     }
-
-    int south = 0;
-    for (int i = x + 1; i < m; ++i) {
-        if (board[i][y] >= board[x][y]) {
-            ++south;
-            break;
-        }
-        ++south;
-    }
-
-    int west = 0;
-    for (int i = y - 1; i >= 0; --i) {
-        if (board[x][i] >= board[x][y]) {
-            ++west;
-            break;
-        }
-        ++west;
-    }
-
-    int east = 0;
-    for (int i = y + 1; i < n; ++i) {
-        if (board[x][i] >= board[x][y]) {
-            ++east;
-            break;
-        }
-        ++east;
-    }
-
-    int score = north * south * west * east;
-
-    return score;
+    return total;
 }
 
 int main(int argc, char ** argv)

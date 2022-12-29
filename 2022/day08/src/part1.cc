@@ -18,46 +18,28 @@ vector<vector<int>> parse(const vector<string> & lines) {
     return board;
 }
 
-bool visible(const vector<vector<int>> & board, int x, int y) {
+bool on_boarder(const vector<vector<int>> & board, int x, int y) {
     int m = board.size();
     int n = board[0].size();
 
-    bool north = true;
-    for (int i = x - 1; i >= 0; --i) {
-        if (board[i][y] >= board[x][y]) {
-            north = false;
-            break;
-        }
-    }
-    if (north) return true;
+    return x <= 0 || x >= m - 1 || y <= 0 || y >= n - 1;
+}
 
-    bool south = true;
-    for (int i = x + 1; i < m; ++i) {
-        if (board[i][y] >= board[x][y]) {
-            south = false;
-            break;
+bool visible(const vector<vector<int>> & board, int x, int y) {
+    static const vector<vector<int>> dirs{{0,1}, {0,-1}, {1,0}, {-1,0}};
+    for (const auto & dir : dirs) {
+        int i = x, j = y;
+        bool can_see = true;
+        while (!on_boarder(board, i, j)) {
+            i += dir[0];
+            j += dir[1];
+            if (board[i][j] >= board[x][y]) {
+                can_see = false;
+                break;
+            }
         }
+        if (can_see) return true;
     }
-    if (south) return true;
-
-    bool west = true;
-    for (int i = y - 1; i >= 0; --i) {
-        if (board[x][i] >= board[x][y]) {
-            west = false;
-            break;
-        }
-    }
-    if (west) return true;
-
-    bool east = true;
-    for (int i = y + 1; i < n; ++i) {
-        if (board[x][i] >= board[x][y]) {
-            east = false;
-            break;
-        }
-    }
-    if (east) return true;
-
     return false;
 }
 
