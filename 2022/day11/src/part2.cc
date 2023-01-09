@@ -131,7 +131,7 @@ int main(int argc, char ** argv)
         }
     }
 
-    sort(cnt.begin(), cnt.end(), std::greater<int>());
+    sort(cnt.begin(), cnt.end(), std::greater<long>());
     cout << "ans: " << cnt[0] * cnt[1] << endl;
 
     return 0;
