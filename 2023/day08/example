@@ -1,0 +1,9 @@
+L
+
+BBA = (BBB, BBB)
+BBB = (ZZZ, ZZZ)
+ZZZ = (ZZZ, ZZZ)
+CCA = (CCC, CCC)
+CCC = (DDD, DDD)
+DDD = (DDZ, DDZ)
+DDZ = (DDZ, DDZ)
