@@ -11,4 +11,5 @@
     - Two pair: easy
     - One pair: easy
     - High card: 0 pair
+- Always convert J to the most commond cards to get the strongest type.
 

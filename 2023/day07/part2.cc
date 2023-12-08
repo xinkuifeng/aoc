@@ -20,14 +20,9 @@ int get_idx(const char & c) {
 }
 
 int compute_type(const unordered_map<char, int> & m) {
-    int pairs = 0;
-    int j = 0;
     int max = 0;
+    int pairs = 0;
     for (const auto & p : m) {
-        if (p.first == 'J') {
-            j = p.second;
-            continue;
-        }
         if (p.second == 2) {
             ++pairs;
         }
@@ -35,10 +30,9 @@ int compute_type(const unordered_map<char, int> & m) {
             max = p.second;
         }
     }
-    if (max + j > 3) return max + j + 1;
-    if (max + j < 3) return pairs + j;
-    if (j == 0) return max + pairs;
-    return max + j + std::max(0, pairs - 1);
+    if (max > 3) return max + 1;
+    if (max < 3) return pairs;
+    return max + pairs;
 }
 
 int main(int argc, char ** argv)
@@ -86,9 +80,22 @@ int main(int argc, char ** argv)
             auto bid = line.substr(pos + 1);
             hands[cards] = stoi(bid);
             unordered_map<char, int> m;
+            int j = 0;
+            int max = 0;
+            char max_c;
             for (const auto & c : cards) {
-                ++m[c];
+                if (c == 'J') {
+                    ++j;
+                } else {
+                    ++m[c];
+                    if (m[c] > max) {
+                        max = m[c];
+                        max_c = c;
+                    }
+                }
             }
+            // convert J to the most common card.
+            m[max_c] += j;
             int prio = compute_type(m);
             pq.push({prio, cards});
         }
