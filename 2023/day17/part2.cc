@@ -153,7 +153,6 @@ int main(int argc, char ** argv)
             } else {
                 np.n += 1;
             }
-            if (seen.find(np.to_string()) != seen.end()) continue;
 
             int h = heat + (board[x][y] - '0');
             pq.push({h, np});

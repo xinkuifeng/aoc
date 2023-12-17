@@ -9,7 +9,7 @@
 - use the priority queue and keep the min value (heat loss) at the top.
 - once the end position is reached, it's the optimal solution.
 - skip the already visited point.
-- for a given point, put all its possible neighbors in the queue.
+- pick the point with the smallest heat loss, process its possible neighbors then enqueue.
 - finally mark the current point as visited.
 ```
 
@@ -18,6 +18,6 @@
 
 ## Part II
 
-- As one direction is started, it requires 4 moves to change the direction
-  start in the two directions: 'v' + '>'
+- As one direction is started, it requires 4 moves to change the direction.
+  Start in the two directions: 'v' + '>'
 
